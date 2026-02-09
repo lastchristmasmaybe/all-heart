@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  color: white;
+}
+
+/* CINEMATIC BACKGROUND */
+.background {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.55)),
+    url("https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=3840&q=80");
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.9);
+  z-index: -2;
+}
+
+/* SNOW */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: white;
+  font-size: 12px;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+/* CARD */
+.card {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 40px 32px;
+  max-width: 420px;
+  margin: auto;
+  margin-top: 20vh;
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 15px;
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  padding: 12px 26px;
+  font-size: 14px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#yes:hover {
+  transform: scale(1.1);
+}
+
+#no {
+  background: rgba(255,255,255,0.25);
+  color: white;
+  position: relative;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="card" id="card">
+  <h1>Aey Chinnu ❤️</h1>
+  <p>I have something important to ask…</p>
+
+  <h2>Will you be my Valentine?</h2>
+
+  <div class="buttons">
+    <button id="yes">Yes 💖</button>
+    <button id="no">Illa 🙈</button>
+  </div>
+
+  <div class="footer">Made with ❤️ just for you</div>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const card = document.getElementById("card");
+
+/* NO BUTTON ESCAPE */
+noBtn.addEventListener("mouseover", () => {
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 120 - 60;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+/* YES CLICK */
+yesBtn.addEventListener("click", () => {
+  card.innerHTML = `
+    <h1>You said YES ❄️❤️</h1>
+    <p>This winter just became warmer</p>
+    <h2>Happy Valentine’s Day 🌹</h2>
+    <p>I LOVE YOU</p>
+  `;
+});
+
+/* SNOW GENERATOR */
+function createSnow() {
+  const snow = document.createElement("div");
+  snow.className = "snowflake";
+  snow.innerHTML = "❄";
+  snow.style.left = Math.random() * window.innerWidth + "px";
+  snow.style.fontSize = Math.random() * 6 + 8 + "px";
+  snow.style.animationDuration = Math.random() * 5 + 6 + "s";
+  document.body.appendChild(snow);
+
+  setTimeout(() => snow.remove(), 11000);
+}
+
+setInterval(createSnow, 120);
+</script>
+
+</body>
+</html>
